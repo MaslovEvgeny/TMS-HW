@@ -1,0 +1,10 @@
+- hosts: servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Create file motd from template
+      ansible.builtin.template:
+        src: ./templates/motd.j2
+        dest: /etc/motd
+        mode: '0644'

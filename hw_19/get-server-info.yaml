@@ -1,0 +1,12 @@
+- hosts: servers
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Display system summary
+      ansible.builtin.debug:
+        msg:
+          - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Total Memory: {{ ansible_memtotal_mb }} MB"
+          - "Root Disk: {{ ansible_mounts | json_query('[?mount==`/`].size_total') | first | human_readable }} total"
+

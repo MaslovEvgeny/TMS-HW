@@ -1,0 +1,11 @@
+- hosts: servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Create user Appuser
+      ansible.builtin.user:
+        name: "appuser"
+        state: present
+        create_home: yes
+        shell: /bin/bash

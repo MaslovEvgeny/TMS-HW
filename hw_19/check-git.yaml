@@ -1,0 +1,14 @@
+- hosts: servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Clone only if git is in facts
+      ansible.builtin.git:
+        repo: 'https://gitlab.com/devops201206/it-mtb-blog'
+        dest: /var/www/simple-blog
+      when: "'git' in ansible_facts.packages"
